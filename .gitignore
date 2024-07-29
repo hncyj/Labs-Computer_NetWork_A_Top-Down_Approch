@@ -1,0 +1,34 @@
+# Ignore CMake build directory
+build/
+
+# Ignore CMake generated files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Ignore other common build system files
+_compile_commands.json
+_compile_commands.json.tmp
+.idea/
+.vscode/
+*.swp
+*.swo
+*.swn
+*.bak
+*.backup
+
+# Ignore executables
+*.out
+*.o
+*.a
+*.so
+*.exe
+*.dll
+
+# Ignore logs and databases
+*.log
+*.db
+*.sql
+
+*.DS_Store

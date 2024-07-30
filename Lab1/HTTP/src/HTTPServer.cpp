@@ -4,10 +4,10 @@
 #include <sys/socket.h>
 #include <fstream>
 #include <sstream>
-#include <cstring> // Include for memset
+#include <cstring>
 
-#define PORT 9090  // 服务器监听的端口号
-#define BUFFER_SIZE 1024  // 缓冲区大小
+#define PORT 9090  
+#define BUFFER_SIZE 1024
 
 int main() {
     int server_socket_fd, connect_socket_fd;

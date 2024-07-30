@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>cs50's.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="centercs50s---python-tutorialcenter"><center>cs50's - Python Tutorial</center></h1>
+<h2 id="%E4%B8%80%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA">一、输入与输出</h2>
+<h3 id="11-%E8%BE%93%E5%85%A5">1.1 输入</h3>
+<p><code>name = input(&quot;what's your name?\n&quot;)</code></p>
+<blockquote>
+<p><strong><em>Tips</em></strong>: Python可以不用预定义变量的类型</p>
+</blockquote>
+<p><code>input()</code>会将任何的输入识别为字符串,我们通过调用<code>int()</code>或<code>float()</code>之类的函数(类似于Java中的数据类型类)讲输入转换为希望的数据类型。</p>
+<p><strong>例1.1.1:</strong></p>
+<pre class="hljs"><code><div>    x = input(<span class="hljs-string">"what's x ?"</span>)
+    y = input(<span class="hljs-string">"what's y ?"</span>)
+    z = x + y
+    print(z)
+</div></code></pre>
+<blockquote>
+<p>输入 x = 1, y = 2, 上述代码输出结果为: 12; 此时 z 的类型为字符串。</p>
+</blockquote>
+<p><strong>例1.1.2:</strong></p>
+<pre class="hljs"><code><div>    x = input(<span class="hljs-string">"what's x ?"</span>)
+    y = input(<span class="hljs-string">"what's y ?"</span>)
+    z = int(x + y)
+    print(z) 
+</div></code></pre>
+<blockquote>
+<p>输入x = 1, y = 2, 上述代码的输出结果为: 12; 此时 z 的类型为整型。</p>
+</blockquote>
+<p><strong>例1.1.3:</strong></p>
+<pre class="hljs"><code><div>    x = int(input(<span class="hljs-string">"what's x?"</span>))
+    y = int(input(<span class="hljs-string">"what's y?"</span>))
+    z = x + y
+    print(z)
+</div></code></pre>
+<blockquote>
+<p>输入x = 1, y = 2, 上述代码输出结果为: 3; 此时 z 的类型为整型。</p>
+</blockquote>
+<h3 id="12-%E8%BE%93%E5%87%BA">1.2 输出</h3>
+<p>我们查询<a href="https://docs.python.org/3.12/library/functions.html">Python Built-in Functions</a>来看一看<code>print()</code>的描述。</p>
+<pre class="hljs"><code><div>    print(*objects, sep=<span class="hljs-string">' '</span>, end=<span class="hljs-string">'\n'</span>, file=<span class="hljs-literal">None</span>, flush=<span class="hljs-literal">False</span>)
+</div></code></pre>
+<p>我们给出调用该函数的一些实例:</p>
+<p><strong>例1.2.1:</strong></p>
+<pre class="hljs"><code><div>    name = <span class="hljs-string">"chenyinjie"</span>
+    print(<span class="hljs-string">"Hello, "</span> + name) <span class="hljs-comment"># 输出: Hello, chenyinjie</span>
+
+    print(<span class="hljs-string">"Hello,"</span>, name) <span class="hljs-comment"># 输出: Hello, chenyinjie</span>
+
+    print(<span class="hljs-string">"Hello, "</span>, end = <span class="hljs-string">""</span>) <span class="hljs-comment"># 输出: Hello, chenyinjie(不换行)</span>
+
+    print(name) <span class="hljs-comment"># 输出: chenyinjie</span>
+
+    print(<span class="hljs-string">"Hello,"</span>,name, end=<span class="hljs-string">"???"</span>) <span class="hljs-comment"># 输出: Hello, chenyinjie???</span>
+
+    print(<span class="hljs-string">"Hello,"</span>, name, sep=<span class="hljs-string">"???"</span>) <span class="hljs-comment"># 输出: Hello,???chenyinjie</span>
+</div></code></pre>
+<p>从上述可知,<code>sep</code>用于控制字符间的插入符号,<code>end</code>控制输出的末尾输出的符号。</p>
+<p>针对较长的打印时,我们可以用如下方式进行处理:
+<strong>例1.2.2:</strong></p>
+<pre class="hljs"><code><div>    name = <span class="hljs-string">"chenyinjie"</span>
+    print(<span class="hljs-string">f"Hello, <span class="hljs-subst">{name}</span>"</span>, end = <span class="hljs-string">""</span>) <span class="hljs-comment"># 输出: Hello, chenyinjie</span>
+
+    print(<span class="hljs-string">"Hello, {name}"</span>) <span class="hljs-comment"># 输出: Hello, {name}</span>
+
+    print(<span class="hljs-string">f"Hello, <span class="hljs-subst">{name}</span>"</span>) <span class="hljs-comment"># 输出: Hello, chenyinjie</span>
+</div></code></pre>
+<p>使用<code>print()</code>打印冒号 &quot;&quot; 的方式
+<strong>例1.2.3:</strong></p>
+<pre class="hljs"><code><div>    print(<span class="hljs-string">'"friend"'</span>) <span class="hljs-comment"># 输出: "friend"</span>
+
+    print(<span class="hljs-string">'"friend'</span>) <span class="hljs-comment"># 输出: "friend</span>
+
+    print(<span class="hljs-string">"Hello, \"friend\""</span>) <span class="hljs-comment"># 输出: Hello, "friend"</span>
+</div></code></pre>
+<h3 id="13-%E5%B8%B8%E8%A7%81%E7%9A%84%E4%B8%80%E4%BA%9B%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C">1.3 常见的一些字符串操作</h3>
+<ul>
+<li><code>str.strip()</code>移除字符串中的前后缀空格</li>
+</ul>
+<pre class="hljs"><code><div>    name = <span class="hljs-string">"    chen yin jie    "</span>
+
+    print(<span class="hljs-string">f"<span class="hljs-subst">{name}</span>"</span>) <span class="hljs-comment"># 输出:     chen yin jie     </span>
+
+    name = name.strip() 
+    
+    print(<span class="hljs-string">f"<span class="hljs-subst">{name}</span>"</span>) <span class="hljs-comment"># 输出:chen yin jie</span>
+</div></code></pre>
+<ul>
+<li><code>str.capitalize()</code>大写字符串的第一个单词的首字母</li>
+</ul>
+<pre class="hljs"><code><div>    name = <span class="hljs-string">"chen yin jie"</span>
+  print(<span class="hljs-string">f"<span class="hljs-subst">{name}</span>"</span>) <span class="hljs-comment"># 输出:chen yin jie</span>
+</div></code></pre>
+<h2 id="%E4%BA%8C%E8%BF%90%E7%AE%97%E7%AC%A6">二、运算符</h2>
+<h3 id="21-%E5%8F%96%E6%A8%A1%E8%BF%90%E7%AE%97%E7%AC%A6">2.1 取模运算符:%</h3>
+<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
+        x = int(input(<span class="hljs-string">"what's is x?"</span>))
+        <span class="hljs-keyword">if</span> is_even(x):
+            print(<span class="hljs-string">"x is even number"</span>)
+        <span class="hljs-keyword">else</span>:
+            print(<span class="hljs-string">"x is odd number"</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">is_even</span><span class="hljs-params">(n)</span>:</span>
+        <span class="hljs-keyword">if</span> n % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>:
+            <span class="hljs-keyword">return</span> true
+        <span class="hljs-keyword">else</span>:
+            <span class="hljs-keyword">return</span> false
+</div></code></pre>
+<p>上述的<code>is_even()</code>有一个更加优美的写法:</p>
+<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">is_even</span><span class="hljs-params">(n)</span>:</span>
+        <span class="hljs-keyword">return</span> n % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>
+</div></code></pre>
+<h2 id="%E4%B8%89%E5%87%BD%E6%95%B0">三、函数</h2>
+<h2 id="%E5%9B%9B%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD%E7%AC%A6">四、条件判断符</h2>
+<h2 id="%E4%BA%94%E5%85%B3%E9%94%AE%E5%AD%97">五、关键字</h2>
+<h3 id="51-match">5.1 match</h3>
+<pre class="hljs"><code><div>    name = input(<span class="hljs-string">"what's your name?"</span>)
+
+    <span class="hljs-keyword">if</span> name == <span class="hljs-string">"Harry"</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-string">"Hello my boy!"</span>
+    <span class="hljs-keyword">elif</span> name == <span class="hljs-string">"chenyinjie"</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-string">"Hello my boy!"</span>
+    <span class="hljs-keyword">elif</span> name == <span class="hljs-string">"dog"</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-string">"Bye bitch!"</span>
+    <span class="hljs-keyword">else</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-string">"who are you?"</span>
+
+
+    match name:
+        case <span class="hljs-string">"Harry"</span>:
+            print(<span class="hljs-string">"Hello my boy!"</span>)
+        case <span class="hljs-string">"chenyinjie"</span>:
+            print(<span class="hljs-string">"Hello my boy!"</span>)
+        case <span class="hljs-string">"dog"</span>:
+            print(<span class="hljs-string">"Bye bitch!"</span>)
+        case _:
+            print(<span class="hljs-string">"who are you?"</span>)
+
+    
+    match name:
+        case <span class="hljs-string">"Harry"</span> | <span class="hljs-string">"chenyinjie"</span>:
+            print(<span class="hljs-string">"Hello my boy!"</span>)
+        case <span class="hljs-string">"dog"</span>:
+            print(<span class="hljs-string">"Bye bitch!"</span>)
+        case _:
+            print(<span class="hljs-string">"who are you?"</span>)
+</div></code></pre>
+
+</body>
+</html>

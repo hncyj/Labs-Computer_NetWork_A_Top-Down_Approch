@@ -9,6 +9,9 @@
 #define PORT 9090  
 #define BUFFER_SIZE 1024
 
+// TODO: Implement a multithreaded server.
+// TODO: Write HTTP client to test server. 
+
 int main() {
     int server_socket_fd, connect_socket_fd;
     struct sockaddr_in server_sock_addr, connect_sock_addr;

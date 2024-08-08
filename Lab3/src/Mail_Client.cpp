@@ -45,8 +45,8 @@ int main() {
     std::string end_msg = "\r\n.\r\n";
 
     // create client socket
-    int client_socket_fd;
-    if ((client_socket_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+    int client_socket_fd = socket(AF_INET, SOCK_STREAM, 0);
+    if (client_socket_fd < 0) {
         std::cerr << "create client socket failed." << std::endl;
         return -1;
     }
@@ -55,15 +55,12 @@ int main() {
     server_sock_addr.sin_port = htons(PORT);
     std::cout << "create client socket success." << std::endl;
     
-    // 
-    char ip_str[INET_ADDRSTRLEN];
-    memset(ip_str, 0, INET_ADDRSTRLEN);
-    inet_ntop(AF_INET, host_ptr->h_addr, ip_str, sizeof(ip_str));
-    if (inet_pton(AF_INET, ip_str, &server_sock_addr.sin_addr) <= 0) {
-        std::cerr << "Invalid address/ Address not supported." << std::endl;
+    if (host_ptr->h_addr_list[0] == nullptr) {
+        std::cerr << "No addresses found for the host." << std::endl;
         close(client_socket_fd);
         return -1;
     }
+    memcpy(&server_sock_addr.sin_addr, host_ptr->h_addr_list[0], sizeof(struct in_addr));
     
     // connect to mail server
     if (connect(client_socket_fd, (struct sockaddr*) &server_sock_addr, sizeof(server_sock_addr)) < 0) {
@@ -93,8 +90,17 @@ int main() {
     sendCommand(client_socket_fd, "MAIL FROM:<540589641@qq.com>\r\n", "250");
     sendCommand(client_socket_fd, "RCPT TO:<chenyinjie666@gmail.com>\r\n", "250");
     sendCommand(client_socket_fd, "DATA\r\n", "354");
-    send(client_socket_fd, message.c_str(), message.size(), 0);
-    send(client_socket_fd, end_msg.c_str(), end_msg.size(), 0);
+    if (send(client_socket_fd, message.c_str(), message.size(), 0) < 0) {
+        std::cerr << "send message failed." << std::endl;
+        close(client_socket_fd);
+        return -1;
+    }
+
+    if (send(client_socket_fd, end_msg.c_str(), end_msg.size(), 0) < 0) {
+        std::cerr << "send end message failed." << std::endl;
+        close(client_socket_fd);
+        return -1;
+    }
     sendCommand(client_socket_fd, "QUIT\r\n", "221");
 
     close(client_socket_fd);

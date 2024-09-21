@@ -1,6 +1,7 @@
 #include <iostream>
 #include <unistd.h>
 #include <cctype>
+#include <fcntl.h>
 #include <cstring>
 #include <netinet/in.h>
 #include <sys/socket.h>
@@ -39,6 +40,16 @@ int main() {
         exit(EXIT_FAILURE);
     }
     std::cout << "Set welcome socket opt success." << std::endl;
+
+    // int flags = fcntl(server_sock_fd, F_GETFL, 0);
+    // if (flags < 0) {
+    //     perror("fcntl F_GETFL failed.");
+    //     exit(EXIT_FAILURE);
+    // }
+    // if (fcntl(server_sock_fd, F_SETFL, flags | O_NONBLOCK) < 0) {
+    //     perror("fcntl F_SETFL failed to set non-blocking.");
+    //     exit(EXIT_FAILURE);
+    // }
 
     // set welcom socket addr info
     server_sock_addr.sin_family = AF_INET;
